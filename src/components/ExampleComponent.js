@@ -8,15 +8,18 @@ const propTypes = {
 function ExampleComponent({ children }) {
   return (
     <div>
-      <p>
-        This is an example page. Refresh the page or copy/paste the url to
-        test out the redirect functionality (this same page should load
-        after the redirect).
-      </p>
-      {children ||
-        <div><Link to="/example/two-deep?field1=foo&field2=bar#boom!">
-          Example two deep with query and hash
-        </Link></div>}
+      {
+        children ||
+        <div>
+          <Link to="/example/two-deep?a=1&b=2&c=3#abc">
+            Example two deep with query and hash
+          </Link>
+          &nbsp;/&nbsp;
+          <Link to="/example/two-deep">
+            Example two deep without query and hash
+          </Link>
+        </div>
+      }
     </div>
   );
 }
@@ -24,3 +27,4 @@ function ExampleComponent({ children }) {
 ExampleComponent.propTypes = propTypes;
 
 export default ExampleComponent;
+

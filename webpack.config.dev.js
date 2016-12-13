@@ -1,37 +1,35 @@
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
-import webpack from 'webpack';
+'use strict';
 
-export default {
-  context: __dirname,
-  entry: './index.jsx',
-  output: {
-    path: `${__dirname}/__build__`,
-    filename: 'bundle.js',
+var webpack = require('webpack');
+var path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  devServer: {
+    contentBase: path.join(__dirname, 'dev'),
+    inline: true,
+    port: 7777,
+    historyApiFallback: true,
+    compress: false,
   },
   module: {
-    loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' },
-    ],
+    loaders: [{
+      loader: 'babel',
+      test: /\.jsx?$/,
+      exclude: /(node_modules|bower_components)/,
+      query: {
+        cacheDirectory: true,
+        presets: ['es2015', 'react']
+      }
+    }],
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
-  plugins: (() => {
-    if (process.argv.indexOf('-p') !== -1) {
-      return [
-        new webpack.DefinePlugin({
-          'process.env': {
-            NODE_ENV: JSON.stringify('production'),
-          },
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-          output: {
-            comments: false,
-          },
-        }),
-      ];
-    }
-    return [];
-  })(),
+  output: {
+    path: path.join(__dirname, 'dev'),
+    filename: 'bundle.js',
+  },
 };
 
