@@ -20,7 +20,13 @@ class ExampleTwoDeepComponent extends Component {
     };
   }
 
+  componentWillUpdate(nextProps) {
+    this.queryPresent = Object.keys(nextProps.location.query).length !== 0;
+    this.hashPresent = nextProps.location.hash !== '';
+  }
+
   render() {
+    console.log('render', this.props);
     return (
       <div>
         <div>
