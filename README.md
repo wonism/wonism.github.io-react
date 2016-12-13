@@ -2,7 +2,7 @@
 
 > 본 repository 는 [https://github.com/rafrex/spa-github-pages](https://github.com/rafrex/spa-github-pages) 를 참고하여 수정한 repository 입니다.
 
-<p>페이지로 이동하기 ([https://wonism.github.io](https://wonism.github.io))</p>
+<p>페이지로 이동하기 <a href="https://wonism.github.io">https://wonism.github.io</a></p>
 
 ## Github Pages 에서 SPA 앱 사용하기
 
