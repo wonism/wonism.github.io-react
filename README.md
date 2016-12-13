@@ -14,3 +14,13 @@ $ git commit -am 'add SPA for github pages'
 # 이하 생략 ...
 ```
 
+## 개발서버 열기
+```sh
+$ npm start
+```
+
+## React 애플리케이션 빌드하기
+```sh
+$ npm run bundle
+```
+
