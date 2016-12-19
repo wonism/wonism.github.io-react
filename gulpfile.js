@@ -6,12 +6,22 @@ const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 const sourcemaps = require('gulp-sourcemaps');
 const babel = require('gulp-babel');
+const version = require('gulp-version-number');
+const path = require('path');
 
 const paths = {
   js: './assets/js/**/*.js',
   sass: './assets/css/**/*.scss',
   dev: './dev/public/dist/',
   dist: './public/dist/'
+};
+
+const versionConfig = {
+  value: '%MDS%',
+  append: {
+    key: 'v',
+    to: ['css'],
+  },
 };
 
 let js = 'js';
@@ -74,6 +84,13 @@ gulp.task('css-sm', () => {
     .pipe(gulp.dest(paths.dev + 'css'));
 });
 
+// Append versioning code in HTML
+gulp.task('html', function(){
+  return gulp.src(path.join(__dirname, 'index.html'))
+    .pipe(version(versionConfig))
+    .pipe(gulp.dest(__dirname));
+});
+
 // watching
 gulp.task('watch', () => {
   gulp.watch(paths.js, [js, 'lint']);
@@ -81,5 +98,5 @@ gulp.task('watch', () => {
 });
 
 // gulp default
-gulp.task('default', [js, css]);
+gulp.task('default', [js, css, 'html']);
 
